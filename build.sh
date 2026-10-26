@@ -5,7 +5,7 @@
 #   ./build.sh package    universal (Apple silicon + Intel) build, zipped and as a .dmg in dist/
 set -e
 cd "$(dirname "$0")"
-VERSION="1.1.0"
+VERSION="1.1.1"
 APP="INNO X2.app"
 
 if [ "$1" = "package" ]; then

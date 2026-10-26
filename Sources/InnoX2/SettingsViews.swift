@@ -94,7 +94,12 @@ struct DPIRow: View {
             .buttonStyle(.plain)
             .help("Make stage \(index + 1) active")
 
-            Slider(value: $slider, in: 50...26000, step: 50) {
+            // No `step:` here: on macOS that draws a tick mark per step (~500 of them).
+            // Snap to 50 in the binding instead, and show the value live while dragging.
+            Slider(value: Binding(get: { slider }, set: { v in
+                slider = (v / 50).rounded() * 50
+                text = "\(Int(slider))"
+            }), in: 50...26000) {
                 Text("Stage \(index + 1)")
             } onEditingChanged: { editing in
                 if !editing { commit(Int(slider)) }
